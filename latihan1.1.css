@@ -1,0 +1,101 @@
+* {
+    margin: 0;
+    padding: 0;
+    word-wrap: break-word;
+    box-sizing: border-box;
+}
+
+.center {
+    width: 1100px;
+    margin: auto;
+}
+
+.slider {
+    position: relative;
+    overflow: hidden;
+    transition: 0.3s;
+}
+.slider .slider-items-container {
+    display: flex;
+    flex-wrap: wrap;
+    height: auto;
+    transition: transform 0.35s ease-in-out;
+}
+.slider .slider-items-container img {
+    width: 1100px;
+    height: 619px;
+}
+
+.slider .controls .prev-btn {
+    box-shadow: 0px 0px 1px 0.5px rgb(201, 201, 201);
+    border: 1px solid black;
+    border-radius: 7px;
+    opacity: 0.3;
+    width: 80px;
+    height: 75px;
+    left: 20px;
+    text-align: center;
+    font-size: 55px;
+}
+
+.slider .controls .prev-btn:hover {
+    opacity: 1;
+}
+
+.slider .controls .next-btn {
+    box-shadow: 0px 0px 1px 0.5px rgb(201, 201, 201);
+    border: 1px solid black;
+    border-radius: 7px;
+    opacity: 0.3;
+    width: 80px;
+    height: 75px;
+    right: 20px;
+    text-align: center;
+    font-size: 55px;
+}
+
+.slider .controls .next-btn:hover {
+    opacity: 1;
+}
+
+.slider .controls a {
+    position: absolute;
+    top: 50%;
+    z-index: 1;
+    padding: 6px 10px;
+    margin: -35px 0 0;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.slider .controls a:hover {
+    color: #888;
+}
+.slider .dots {
+    opacity: 0.6;
+    position: absolute;
+    bottom: 15px;
+    width: 100%;
+    text-align: right;
+    right: 15px;
+}
+.slider .dots .dot {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid black;
+    background: #606161;
+    margin: 0 7px;
+    transition: 0.1s;
+    position: relative;
+    cursor: pointer;
+}
+.slider .dots .dot.active {
+    background: rgb(255, 255, 255);
+}
+@media (max-width: 1200px) {
+    .center {
+        width: 100%;
+        padding: 0 15px;
+    }
+}

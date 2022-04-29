@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Latihan 1.1</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="latihan1.1.css">
+</head>
+<body>
+    <div class="center">
+        <div class='slider'>
+            <div class='slider-items-container'>
+                <div class='slider-item'>
+                    <img src="https://images.unsplash.com/photo-1588392382834-a891154bca4d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1055&q=80" />
+                </div>
+                <div class='slider-item'>
+                    <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDF8fHxlbnwwfHx8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" />
+                </div>
+                <div class='slider-item'>
+                    <img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDJ8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60" />
+                </div>
+                <div class='slider-item'>
+                    <img src="https://images.unsplash.com/reserve/HgZuGu3gSD6db21T3lxm_San%20Zenone.jpg?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" />
+                </div>
+                <div class='slider-item'>
+                    <img src="https://images.unsplash.com/photo-1426604966848-d7adac402bff?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDN8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60" />
+                </div>
+            </div>
+            <div class='controls'>
+                <a href="#" class='prev-btn'><i class="fas fa-angle-left" aria-hidden="true"></i></a>
+                <a href="#" class='next-btn'><i class="fas fa-angle-right" aria-hidden="true"></i></a>
+            </div>
+            <div class='dots'></div>
+        </div>
+    </div>
+    <script>
+        function setSlider(){
+            $(".slider").each( function(){
+                var $slider = $(this),
+                        $itemscontainer = $slider.find(".slider-items-container");
+                if ($itemscontainer.find(".slider-item.active").length == 0){
+                    $itemscontainer.find(".slider-item").first().addClass("active");
+                }
+                function setWidth(){
+                    var totalWidth = 0
+                    $($itemscontainer).find(".slider-item").each( function(){
+                        totalWidth += $(this).outerWidth();
+                    });
+                    $itemscontainer.width(totalWidth);
+                }
+                function setTransform(){
+                    
+                    var $activeItem = $itemscontainer.find(".slider-item.active"),
+                            activeItemOffset = $activeItem.offset().left,
+                            itemsContainerOffset = $itemscontainer.offset().left,
+                            totalOffset = activeItemOffset - itemsContainerOffset
+                    $itemscontainer.css({"transform": "translate( -"+totalOffset+"px, 0px)"})
+                }
+                function nextSlide(){
+                    var activeItem = $itemscontainer.find(".slider-item.active"),
+                            activeItemIndex = activeItem.index(),
+                            sliderItemTotal = $itemscontainer.find(".slider-item").length,
+                            nextSlide = 0;
+                    if (activeItemIndex + 1 > sliderItemTotal - 1){
+                        nextSlide = 0;
+                    }else{
+                        nextSlide = activeItemIndex + 1
+                    }
+                    var nextSlideSelect = $itemscontainer.find(".slider-item").eq(nextSlide),
+                            itemContainerOffset = $itemscontainer.offset().left,
+                            totalOffset = nextSlideSelect.offset().left - itemContainerOffset
+                    $itemscontainer.find(".slider-item.active").removeClass("active");
+                    nextSlideSelect.addClass("active");
+                    $slider.find(".dots").find(".dot").removeClass("active")
+                    $slider.find(".dots").find(".dot").eq(nextSlide).addClass("active");
+                    $itemscontainer.css({"transform": "translate( -"+totalOffset+"px, 0px)"})
+                }
+                function prevSlide(){
+                    var activeItem = $itemscontainer.find(".slider-item.active"),
+                            activeItemIndex = activeItem.index(),
+                            sliderItemTotal = $itemscontainer.find(".slider-item").length,
+                            nextSlide = 0;
+                    if (activeItemIndex - 1 < 0){
+                        nextSlide = sliderItemTotal - 1;
+                    }else{
+                        nextSlide = activeItemIndex - 1;
+                    }
+                    var nextSlideSelect = $itemscontainer.find(".slider-item").eq(nextSlide),
+                            itemContainerOffset = $itemscontainer.offset().left,
+                            totalOffset = nextSlideSelect.offset().left - itemContainerOffset
+                    $itemscontainer.find(".slider-item.active").removeClass("active");
+                    nextSlideSelect.addClass("active");
+                    $slider.find(".dots").find(".dot").removeClass("active")
+                    $slider.find(".dots").find(".dot").eq(nextSlide).addClass("active");
+                    $itemscontainer.css({"transform": "translate( -"+totalOffset+"px, 0px)"})
+                }
+                function makeDots(){
+                    var activeItem = $itemscontainer.find(".slider-item.active"),
+                            activeItemIndex = activeItem.index(),
+                            sliderItemTotal = $itemscontainer.find(".slider-item").length;
+                    for (i = 0; i < sliderItemTotal; i++){
+                        $slider.find(".dots").append("<div class='dot'></div>")
+                    }
+                    $slider.find(".dots").find(".dot").eq(activeItemIndex).addClass("active")
+                }
+                setWidth();
+                setTransform();
+                makeDots();
+                $(window).resize( function(){
+                            setWidth();
+                            setTransform();
+                });
+                var nextBtn = $slider.find(".controls").find(".next-btn"),
+                        prevBtn = $slider.find(".controls").find(".prev-btn");
+                nextBtn.on('click', function(e){
+                    e.preventDefault();
+                    nextSlide();
+                });
+                prevBtn.on('click', function(e){
+                    e.preventDefault();
+                    prevSlide();
+                });
+                $slider.find(".dots").find(".dot").on('click', function(e){
+                    
+                    var dotIndex = $(this).index(),
+                            totalOffset = $itemscontainer.find(".slider-item").eq(dotIndex).offset().left - $itemscontainer.offset().left;
+                            
+                    $itemscontainer.find(".slider-item.active").removeClass("active");
+                    $itemscontainer.find(".slider-item").eq(dotIndex).addClass("active");
+                    $slider.find(".dots").find(".dot").removeClass("active");
+                    $(this).addClass("active")
+                    
+                    $itemscontainer.css({"transform": "translate( -"+totalOffset+"px, 0px)"})
+                    
+                });
+                
+            });
+            
+        }
+        setSlider();
+    </script>
+</body>
+</html>
