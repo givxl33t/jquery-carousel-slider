@@ -1,7 +1,8 @@
 # jquery-carousel-slider
 
-Simple and easy to use Jquery Carousel made from scratch, with changeable sizes.
+:fire::fire::fire:No need for sum `goofy ahh` Jquery carousel template cuh :flushed:, use it for ur assignment or smth idk
+cuz there aint no way this shit gon make it on a production environment **LMAO**:satisfied::satisfied::fire::fire::fire:
 
-# showcase page :
+# Showcase page :
 
 https://givxl33t.github.io/jquery-carousel-slider/
